@@ -38,21 +38,12 @@
   .key { background:rgba(0,0,0,.04); border:1px solid var(--line); border-radius:4px; padding:1px 7px; font-size:11px; color:var(--ink-48); }
 
   @media (max-width: 640px) {
-    html, body {
-      background: #111 !important;
-      overflow: hidden !important;
-    }
-    .slides {
-      background: #111 !important;
-    }
+    html, body { background: #111 !important; overflow: hidden !important; }
+    .slides { background: #111 !important; }
     .key-hint { display: none !important; }
-    .slide-num { color: rgba(255,255,255,0.6) !important; top: 12px !important; right: 14px !important; }
+    .slide-num { color: rgba(255,255,255,0.6) !important; top:12px !important; right:14px !important; }
     .nav { bottom: 14px !important; }
-    .nav-btn {
-      background: rgba(255,255,255,0.12) !important;
-      border-color: rgba(255,255,255,0.25) !important;
-      color: rgba(255,255,255,0.8) !important;
-    }
+    .nav-btn { background: rgba(255,255,255,0.12) !important; border-color: rgba(255,255,255,0.25) !important; color: rgba(255,255,255,0.8) !important; }
     .pdot { background: rgba(255,255,255,0.3) !important; }
     .pdot.active { background: rgba(255,255,255,0.9) !important; }
   }
@@ -67,7 +58,7 @@
 ══════════════════════════════════════ -->
 <div class="slide s-white active" data-index="0" style="flex-direction:column;text-align:center;">
   <p style="font-size:13px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-48);margin-bottom:36px;">Leaders Book Club · 2026년 6월</p>
-  <h1 style="font-size:clamp(40px,6vw,88px);font-weight:700;letter-spacing:-0.03em;line-height:1.05;color:var(--ink);margin-bottom:12px;">맥킨지 성장의 묘약</h1>
+  <h1 style="font-size:clamp(40px,6vw,88px);font-weight:700;letter-spacing:-0.03em;line-height:1.05;color:var(--ink);margin-bottom:12px;white-space:nowrap;">맥킨지 성장의 묘약</h1>
   <p style="font-size:clamp(15px,1.7vw,20px);font-weight:300;color:var(--ink-48);letter-spacing:.04em;font-style:italic;margin-bottom:28px;">The Alchemy of Growth</p>
 </div>
 
@@ -168,7 +159,7 @@
 <div class="slide s-white" data-index="5" style="flex-direction:column;text-align:center;">
   <div style="text-align:center;max-width:800px;">
     <p style="font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-48);margin-bottom:28px;">Leaders Book Club · 2026년 6월</p>
-    <h2 style="font-size:clamp(28px,4vw,56px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;color:var(--ink);margin-bottom:20px;">이제 우리의 Horizon을 그려봅시다.</h2>
+    <h2 style="font-size:clamp(28px,4vw,56px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;color:var(--ink);margin-bottom:20px;white-space:nowrap;">이제 우리의 Horizon을 그려봅시다.</h2>
     <p style="font-size:clamp(16px,1.7vw,20px);font-weight:400;color:var(--ink-48);line-height:1.75;max-width:640px;margin:0 auto;">각자의 자리에서 H1을 지키고, H2를 키우고, H3의 씨앗을 심는 것.<br>그것이 우리가 함께 만들어갈 퍼시스그룹의 성장입니다.</p>
 </div>
 
@@ -215,9 +206,8 @@
     }
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    // 원본 슬라이드 실제 렌더 크기에 맞게 scale
-    const refW = 1200;
-    const refH = 675; // 16:9 기준
+    const refW = 1440;
+    const refH = 900;
     const scale = Math.min(vw / refW, vh / refH);
     const el = document.querySelector('.slides');
     el.style.width = refW + 'px';
@@ -233,7 +223,6 @@
   mobileScale();
   window.addEventListener('resize', mobileScale);
 
-  // 스와이프
   let _sx = 0;
   document.addEventListener('touchstart', e => { _sx = e.touches[0].clientX; }, {passive:true});
   document.addEventListener('touchend', e => {
