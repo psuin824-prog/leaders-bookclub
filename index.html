@@ -37,23 +37,21 @@
   .key-hint { position:fixed; bottom:28px; right:32px; font-size:11px; color:var(--ink-48); display:flex; align-items:center; gap:5px; }
   .key { background:rgba(0,0,0,.04); border:1px solid var(--line); border-radius:4px; padding:1px 7px; font-size:11px; color:var(--ink-48); }
 
-  @media (max-width:640px) {
+  @media (max-width: 640px) {
     html, body {
       background: #111 !important;
       overflow: hidden !important;
     }
     .slides {
       background: #111 !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     .key-hint { display: none !important; }
-    .slide-num { color: rgba(255,255,255,0.5) !important; }
+    .slide-num { color: rgba(255,255,255,0.6) !important; top: 12px !important; right: 14px !important; }
+    .nav { bottom: 14px !important; }
     .nav-btn {
       background: rgba(255,255,255,0.12) !important;
-      border-color: rgba(255,255,255,0.2) !important;
-      color: rgba(255,255,255,0.7) !important;
+      border-color: rgba(255,255,255,0.25) !important;
+      color: rgba(255,255,255,0.8) !important;
     }
     .pdot { background: rgba(255,255,255,0.3) !important; }
     .pdot.active { background: rgba(255,255,255,0.9) !important; }
@@ -69,7 +67,7 @@
 ══════════════════════════════════════ -->
 <div class="slide s-white active" data-index="0" style="flex-direction:column;text-align:center;">
   <p style="font-size:13px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-48);margin-bottom:36px;">Leaders Book Club · 2026년 6월</p>
-  <h1 style="font-size:clamp(40px,6vw,88px);font-weight:700;letter-spacing:-0.03em;line-height:1.05;color:var(--ink);margin-bottom:12px;white-space:nowrap;">맥킨지 성장의 묘약</h1>
+  <h1 style="font-size:clamp(40px,6vw,88px);font-weight:700;letter-spacing:-0.03em;line-height:1.05;color:var(--ink);margin-bottom:12px;">맥킨지 성장의 묘약</h1>
   <p style="font-size:clamp(15px,1.7vw,20px);font-weight:300;color:var(--ink-48);letter-spacing:.04em;font-style:italic;margin-bottom:28px;">The Alchemy of Growth</p>
 </div>
 
@@ -90,15 +88,15 @@
     <div style="display:flex;flex-direction:column;gap:10px;">
       <div style="display:flex;align-items:center;gap:20px;padding:20px 32px;border-radius:14px;background:var(--parch);border:1px solid var(--line);min-height:72px;">
         <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
-        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;white-space:nowrap;">우리 부문의 3대 Horizon을 그려본다면 어떤 모습인가요? H1~H3 중 우리는 무엇을 잘하고 있고, 무엇이 부족한가요?</p>
+        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;">우리 부문의 3대 Horizon을 그려본다면 어떤 모습인가요? H1~H3 중 우리는 무엇을 잘하고 있고, 무엇이 부족한가요?</p>
       </div>
       <div style="display:flex;align-items:center;gap:20px;padding:20px 32px;border-radius:14px;background:var(--parch);border:1px solid var(--line);min-height:72px;">
         <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
-        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;white-space:nowrap;">내가 담당하는 사업의 다음 성장을 위해 지금 가장 우선순위로 추진해야 할 것은 무엇인가요?</p>
+        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;">내가 담당하는 사업의 다음 성장을 위해 지금 가장 우선순위로 추진해야 할 것은 무엇인가요?</p>
       </div>
       <div style="display:flex;align-items:center;gap:20px;padding:20px 32px;border-radius:14px;background:var(--parch);border:1px solid var(--line);min-height:72px;">
         <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
-        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;white-space:nowrap;">그 우선순위를 실현하기 위해 리더십 또는 조직관리 측면에서 지켜야 할 것과 보완해야 할 것은 무엇인가요?</p>
+        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;">그 우선순위를 실현하기 위해 리더십 또는 조직관리 측면에서 지켜야 할 것과 보완해야 할 것은 무엇인가요?</p>
       </div>
     </div>
   </div>
@@ -148,15 +146,15 @@
     <div style="display:flex;flex-direction:column;gap:10px;">
       <div style="display:flex;align-items:center;gap:20px;padding:20px 32px;border-radius:14px;background:var(--parch);border:1px solid var(--line);min-height:72px;">
         <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
-        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;white-space:nowrap;">우리 부문의 3대 Horizon을 그려본다면 어떤 모습인가요? H1~H3 중 우리는 무엇을 잘하고 있고, 무엇이 부족한가요?</p>
+        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;">우리 부문의 3대 Horizon을 그려본다면 어떤 모습인가요? H1~H3 중 우리는 무엇을 잘하고 있고, 무엇이 부족한가요?</p>
       </div>
       <div style="display:flex;align-items:center;gap:20px;padding:20px 32px;border-radius:14px;background:var(--parch);border:1px solid var(--line);min-height:72px;">
         <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
-        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;white-space:nowrap;">내가 담당하는 사업의 다음 성장을 위해 지금 가장 우선순위로 추진해야 할 것은 무엇인가요?</p>
+        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;">내가 담당하는 사업의 다음 성장을 위해 지금 가장 우선순위로 추진해야 할 것은 무엇인가요?</p>
       </div>
       <div style="display:flex;align-items:center;gap:20px;padding:20px 32px;border-radius:14px;background:var(--parch);border:1px solid var(--line);min-height:72px;">
         <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
-        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;white-space:nowrap;">그 우선순위를 실현하기 위해 리더십 또는 조직관리 측면에서 지켜야 할 것과 보완해야 할 것은 무엇인가요?</p>
+        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;">그 우선순위를 실현하기 위해 리더십 또는 조직관리 측면에서 지켜야 할 것과 보완해야 할 것은 무엇인가요?</p>
       </div>
     </div>
   </div>
@@ -170,7 +168,7 @@
 <div class="slide s-white" data-index="5" style="flex-direction:column;text-align:center;">
   <div style="text-align:center;max-width:800px;">
     <p style="font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-48);margin-bottom:28px;">Leaders Book Club · 2026년 6월</p>
-    <h2 style="font-size:clamp(28px,4vw,56px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;color:var(--ink);margin-bottom:20px;white-space:nowrap;">이제 우리의 Horizon을 그려봅시다.</h2>
+    <h2 style="font-size:clamp(28px,4vw,56px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;color:var(--ink);margin-bottom:20px;">이제 우리의 Horizon을 그려봅시다.</h2>
     <p style="font-size:clamp(16px,1.7vw,20px);font-weight:400;color:var(--ink-48);line-height:1.75;max-width:640px;margin:0 auto;">각자의 자리에서 H1을 지키고, H2를 키우고, H3의 씨앗을 심는 것.<br>그것이 우리가 함께 만들어갈 퍼시스그룹의 성장입니다.</p>
 </div>
 
@@ -211,30 +209,26 @@
 
   function mobileScale() {
     if (window.innerWidth > 640) {
-      document.querySelector('.slides').style.transform = '';
-      document.querySelector('.slides').style.width = '';
-      document.querySelector('.slides').style.height = '';
+      const el = document.querySelector('.slides');
+      el.style.cssText = '';
       return;
     }
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    // 원본 슬라이드 크기: 100vw × 100vh (데스크탑 기준 ~ 1440 × 900)
-    // 모바일에서 16:9 비율로 vw 기준 축소
-    const slideW = 1440;
-    const slideH = 900;
-    const scaleX = vw / slideW;
-    const scaleY = vh / slideH;
-    const scale = Math.min(scaleX, scaleY);
+    // 원본 슬라이드 실제 렌더 크기에 맞게 scale
+    const refW = 1200;
+    const refH = 675; // 16:9 기준
+    const scale = Math.min(vw / refW, vh / refH);
     const el = document.querySelector('.slides');
-    el.style.width = slideW + 'px';
-    el.style.height = slideH + 'px';
+    el.style.width = refW + 'px';
+    el.style.height = refH + 'px';
     el.style.transform = 'scale(' + scale + ')';
     el.style.transformOrigin = 'center center';
     el.style.position = 'fixed';
     el.style.top = '50%';
     el.style.left = '50%';
-    el.style.marginTop = (-slideH / 2) + 'px';
-    el.style.marginLeft = (-slideW / 2) + 'px';
+    el.style.marginTop = (-refH / 2) + 'px';
+    el.style.marginLeft = (-refW / 2) + 'px';
   }
   mobileScale();
   window.addEventListener('resize', mobileScale);
