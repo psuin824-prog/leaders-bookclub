@@ -37,33 +37,135 @@
   .key-hint { position:fixed; bottom:28px; right:32px; font-size:11px; color:var(--ink-48); display:flex; align-items:center; gap:5px; }
   .key { background:rgba(0,0,0,.04); border:1px solid var(--line); border-radius:4px; padding:1px 7px; font-size:11px; color:var(--ink-48); }
 
+  /* ════════════════════════════
+     MOBILE ONLY (≤640px)
+  ════════════════════════════ */
   @media (max-width:640px) {
-    /* 슬라이드를 상단 정렬 + 스크롤 허용 */
+
+    /* 슬라이드 기본: 상단 정렬, 스크롤 허용 */
     .slide {
-      justify-content:flex-start !important;
-      align-items:flex-start !important;
-      overflow-y:auto !important;
-      padding:40px 18px 90px !important;
+      justify-content: flex-start !important;
+      align-items: stretch !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      padding: 52px 20px 88px !important;
+      -webkit-overflow-scrolling: touch;
     }
-    /* 표지·마무리는 중앙 정렬 유지 */
+
+    /* 표지·마무리: 중앙 세로 정렬 유지 */
     .slide[data-index="0"],
     .slide[data-index="5"] {
-      justify-content:center !important;
-      align-items:center !important;
+      justify-content: center !important;
+      align-items: center !important;
     }
-    /* 텍스트 줄바꿈 허용 */
-    .slide p, .slide h1, .slide h2 {
-      white-space:normal !important;
+
+    /* 모든 텍스트 줄바꿈 */
+    .slide * { white-space: normal !important; }
+
+    /* 최대 너비 제거 */
+    .slide > *, .slide > div { max-width: 100% !important; width: 100% !important; }
+
+    /* 표지 h1 크기 */
+    .slide[data-index="0"] h1 {
+      font-size: clamp(30px, 9vw, 48px) !important;
+      text-align: center;
     }
-    /* 카드 너비 100% */
-    .slide > div { width:100% !important; max-width:100% !important; }
-    /* 카드 패딩 줄이기 */
-    .slide [style*="padding:20px 32px"] { padding:14px 16px !important; }
+
+    /* Horizon 이미지 */
+    .slide[data-index="1"] img {
+      max-height: 52vw !important;
+      width: 100% !important;
+    }
+    .slide[data-index="1"] p {
+      font-size: 14px !important;
+      text-align: center;
+      margin-bottom: 16px !important;
+    }
+
+    /* Discussion 카드 */
+    .slide[data-index="2"] > div,
+    .slide[data-index="4"] > div {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+    .slide[data-index="2"] > div > div,
+    .slide[data-index="4"] > div > div {
+      padding: 14px 16px !important;
+      border-radius: 12px !important;
+      min-height: auto !important;
+      gap: 12px !important;
+    }
+    .slide[data-index="2"] p,
+    .slide[data-index="4"] p {
+      font-size: 14px !important;
+      line-height: 1.65 !important;
+    }
+    /* Discussion 라벨 */
+    .slide[data-index="2"] > div > p,
+    .slide[data-index="4"] > div > p {
+      font-size: 10px !important;
+      margin-bottom: 4px !important;
+    }
+
+    /* 진단 슬라이드 */
+    .slide[data-index="3"] > div {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 8px !important;
+    }
+    .slide[data-index="3"] > div > div:first-child {
+      margin-bottom: 4px !important;
+    }
+    .slide[data-index="3"] > div > div:first-child p {
+      font-size: 12px !important;
+    }
+    /* 진단 카드 */
+    .slide[data-index="3"] > div > div:not(:first-child) {
+      padding: 12px 14px !important;
+      border-radius: 8px !important;
+      gap: 8px !important;
+    }
+    .slide[data-index="3"] > div > div:not(:first-child) > div:first-child {
+      font-size: 12px !important;
+    }
+    /* H1/H2/H3 뱃지 행 */
+    .slide[data-index="3"] > div > div:not(:first-child) > div:last-child {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0 !important;
+    }
+    /* 뱃지 높이 줄이기 */
+    .slide[data-index="3"] [style*="height:34px"] {
+      height: 28px !important;
+      font-size: 11px !important;
+    }
+    /* 연결선 줄이기 */
+    .slide[data-index="3"] [style*="width:14px"] {
+      width: 8px !important;
+    }
+
+    /* 마무리 */
+    .slide[data-index="5"] h2 {
+      font-size: clamp(22px, 7vw, 36px) !important;
+      text-align: center;
+    }
+    .slide[data-index="5"] p {
+      font-size: 14px !important;
+      text-align: center;
+    }
+
+    /* 슬라이드 번호 */
+    .slide-num { top: 14px !important; right: 16px !important; font-size: 11px !important; }
+
+    /* 네비게이션 */
+    .nav { bottom: 16px !important; gap: 8px !important; }
+    .nav-btn { width: 36px !important; height: 36px !important; }
+
     /* 키보드 힌트 숨기기 */
-    .key-hint { display:none; }
-    /* 이미지 모바일 높이 제한 */
-    .slide img { max-height:50vh !important; }
+    .key-hint { display: none !important; }
   }
+
 </style>
 </head>
 <body>
@@ -213,14 +315,15 @@
     slideNum.textContent = (current + 1) + ' / ' + slides.length;
   }
   document.getElementById('prev').onclick = () => goTo(current - 1);
-  document.getElementById('next').onclick = () => goTo(current + 1);
   // 터치 스와이프
-  let startX = 0;
-  document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive:true });
+  let _sx = 0;
+  document.addEventListener('touchstart', e => { _sx = e.touches[0].clientX; }, {passive:true});
   document.addEventListener('touchend', e => {
-    const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) diff > 0 ? goTo(current + 1) : goTo(current - 1);
-  }, { passive:true });
+    const diff = _sx - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 44) diff > 0 ? goTo(current+1) : goTo(current-1);
+  }, {passive:true});
+
+  document.getElementById('next').onclick = () => goTo(current + 1);
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
     if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(current - 1);
