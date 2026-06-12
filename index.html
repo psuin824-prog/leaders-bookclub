@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>리더스 북클럽 — 맥킨지 성장의 묘약</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  :root {
+    --ink:    #1d1d1f;
+    --ink-48: #7a7a7a;
+    --canvas: #ffffff;
+    --parch:  #f5f5f7;
+    --line:   #e0e0e0;
+  }
+  html,body { width:100%; height:100%; overflow:hidden; }
+  body { font-family:'Pretendard',-apple-system,sans-serif; background:var(--canvas); color:var(--ink); }
+  .slides { width:100%; height:100vh; position:relative; overflow:hidden; }
+  .slide {
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none;
+    transition:opacity .4s ease;
+  }
+  .slide.active { opacity:1; pointer-events:all; }
+  .s-white { background:var(--canvas); }
+  .s-parch  { background:var(--parch); }
+  /* nav */
+  .nav { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:12px; z-index:100; }
+  .nav-btn { width:38px; height:38px; border-radius:50%; border:1px solid var(--line); background:rgba(0,0,0,.04); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:14px; color:var(--ink-48); transition:all .2s; font-family:'Pretendard',sans-serif; }
+  .nav-btn:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .pdots { display:flex; gap:5px; align-items:center; }
+  .pdot { width:6px; height:6px; border-radius:50%; background:rgba(0,0,0,.15); transition:all .25s; cursor:pointer; }
+  .pdot.active { background:var(--ink); width:18px; border-radius:3px; }
+  .slide-num { position:fixed; top:22px; right:32px; font-size:12px; color:var(--ink-48); z-index:100; font-weight:500; }
+  .key-hint { position:fixed; bottom:28px; right:32px; font-size:11px; color:var(--ink-48); display:flex; align-items:center; gap:5px; }
+  .key { background:rgba(0,0,0,.04); border:1px solid var(--line); border-radius:4px; padding:1px 7px; font-size:11px; color:var(--ink-48); }
+</style>
+</head>
+<body>
+<div class="slides">
+
+<!-- ══════════════════════════════════════
+     1. 표지
+══════════════════════════════════════ -->
+<div class="slide s-white active" data-index="0" style="flex-direction:column;text-align:center;">
+  <p style="font-size:13px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-48);margin-bottom:36px;">Leaders Book Club · 2026년 6월</p>
+  <h1 style="font-size:clamp(40px,6vw,88px);font-weight:700;letter-spacing:-0.03em;line-height:1.05;color:var(--ink);margin-bottom:12px;white-space:nowrap;">맥킨지 성장의 묘약</h1>
+  <p style="font-size:clamp(15px,1.7vw,20px);font-weight:300;color:var(--ink-48);letter-spacing:.04em;font-style:italic;margin-bottom:28px;">The Alchemy of Growth</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     2. Horizon 그래프 (원본 완전 재현 SVG)
+══════════════════════════════════════ -->
+<div class="slide s-parch" data-index="1" style="flex-direction:column;align-items:center;padding:3vh 6vw;">
+  <p style="font-size:clamp(16px,1.6vw,22px);font-weight:400;color:var(--ink);line-height:1.6;text-align:center;margin-bottom:24px;letter-spacing:-0.01em;">지속적으로 성장하는 기업은 <strong style="font-weight:700;">3개의 Horizon을 동시에 관리</strong>한다.</p>
+  <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAEwAd0DASIAAhEBAxEB/8QAHAABAAICAwEAAAAAAAAAAAAAAAYHAQgDBAUC/8QAURAAAQQBAgQBBQwHBAYIBwAAAQACAwQFBhEHEhMhIhQYMUFYCBU3OFFhc3WUs7TTFiMyQnGBoRckQ5EzYnKSk7ElJig1UlbB0TZTY4KiwtT/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAeEQEBAQADAAMBAQAAAAAAAAAAAREhMUECEmHwcf/aAAwDAQACEQMRAD8A3KRF0szlMbhcbLksvfq4+jAN5rNqZsUUY9G7nOIA7kDufWpaO6ijzNbaNfj6eRZqzAuo3p/J6dkZGIxWJd9unG7m2e//AFRuV62WyWPxGPmyOVvVqNKBpfNZsytjjjaPW5ziAAmDtouClarXqcNynYisVp2NkhmieHskYRuHNcOxBB3BC51cGUREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQYXXv1YL1OanaibNXnjdFLG8btexw2c0j5CCQuwiz4KN9z1HkMVSy+g8nXc2rofJ2Iq8srefqwyAS1XA7bktjkfuB/qfL2rvC8UMtqPS/EbGZjV8OVxcmiZshQltQ168ge7qxOAZE0Bg5ixvTL5XNPKC8OLmDbZFflysuNQtR8S9TaS0bjI8RrJuPoP4dUr2JaYaz2vvRyxxyMjc+Nxk8AdzM3cW7k+HbtYOluIOsM1xtfhzm8LBiIHVzDQfM3q5CpLW5xagY2BzpD1DuZBM2NrWkFm/iN+Ir9uWb0BZKwiDKIiKIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAvA4kW7NDh5qS9TmfBZr4m1NDKw7OY9sLi1w+cEAr31GeK/wXas+pLn3D0EX9yxnsvqfgNprN56/LkMjZZP1rEpBc/lsSsG+3yBoH8lZyp/3GfxadH/RWfxUyuBAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQFGeK/wXas+pLn3D1JlGeK/wXas+pLn3D0EF9xn8WnR/0Vn8VMrgVP8AuM/i06P+is/iplcCAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgKM8V/gu1Z9SXPuHqTKM8V/gu1Z9SXPuHoIL7jP4tOj/orP4qZXAqf9xn8WnR/0Vn8VMrgQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBRniv8ABdqz6kufcPUmUZ4r/Bdqz6kufcPQQX3GfxadH/RWfxUyuBU/7jP4tOj/AKKz+KmVwICIiAiIgIiI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QPs0/wCQg2NRa5ecTr72cOIH2af8hPOJ197OHED7NP8AkINjUWuXnE6+9nDiB9mn/ITzidfezhxA+zT/AJCDY1Frl5xOvvZw4gfZp/yE84nX3s4cQPs0/wCQg2NRa5ecTr72cOIH2af8hPOJ197OHED7NP8AkINjUWuXnE6+9nDiB9mn/ITzidfezhxA+zT/AJCDY1Frl5xOvvZw4gfZp/yE84nX3s4cQPs0/wCQg2NRa5ecTr72cOIH2af8hPOJ197OHED7NP8AkINjUWuXnE6+9nDiB9mn/ITzidfezhxA+zT/AJCDY1Frl5xOvvZw4gfZp/yE84nX3s4cQPs0/wCQg2NXHYmjgifLK9rGMaXOc47BoHckn1LXfzitfezjr/7PP/8Azq/KEhyeIhlt03wGzC18laZu5ZzN3LHAj0jcgghS0R+nxO4c3bcNOjr/AEpctTyNjhggzNd8kj3EBrWtD9ySSAApHjshRyHlHkN6ta8mndXn6ErX9KVu3NG7Y+Fw3G7T3G6prQ1/T2Q901r/ABjLuLtEY7GMjrNmjf8ArIOpzgM37ujdy79t2nbfbsoBBxDy9KnNFiNcY6jYs8UJcVPMypQ3npv7dWQNjAc7wj9b2J37k9gnxpeP781tgFnfutXOD3F7U+Y1dp3H3tY0s1JkKeWjfjwytG50teXas5xY0OEkjQ49tmluxDBsXGc+5n1lq3WFa9e1LnMTe6kTJDSry81nGTh72yQysEEfSHZoax7pH+Fx53A7i+RLcuLqRERRERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQERFAREVGE2QIiYyiBEUREQEREH/9k=" style="width:100%;max-width:800px;max-height:64vh;border-radius:4px;object-fit:contain;" alt="Horizon Framework"/>
+</div>
+
+<!-- ══════════════════════════════════════
+     3. 토론 주제
+══════════════════════════════════════ -->
+<div class="slide s-white" data-index="2" style="align-items:center;justify-content:center;padding:3vh 6vw;">
+  <div style="width:100%;max-width:1100px;">
+    <p style="font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-48);margin-bottom:22px;">Discussion</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:center;gap:20px;padding:20px 32px;border-radius:14px;background:var(--parch);border:1px solid var(--line);min-height:72px;">
+        <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;white-space:nowrap;">우리 부문의 3대 Horizon을 그려본다면 어떤 모습인가요? H1~H3 중 우리는 무엇을 잘하고 있고, 무엇이 부족한가요?</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;padding:20px 32px;border-radius:14px;background:var(--parch);border:1px solid var(--line);min-height:72px;">
+        <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;white-space:nowrap;">내가 담당하는 사업의 다음 성장을 위해 지금 가장 우선순위로 추진해야 할 것은 무엇인가요?</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;padding:20px 32px;border-radius:14px;background:var(--parch);border:1px solid var(--line);min-height:72px;">
+        <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;white-space:nowrap;">그 우선순위를 실현하기 위해 리더십 또는 조직관리 측면에서 지켜야 할 것과 보완해야 할 것은 무엇인가요?</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     4. 3대 Horizon 진단
+══════════════════════════════════════ -->
+
+
+<div class="slide s-parch" data-index="3" style="flex-direction:column;align-items:center;justify-content:center;padding:2.5vh 5vw;overflow:hidden;">
+  <div style="width:100%;max-width:1300px;display:flex;flex-direction:column;gap:10px;justify-content:center;">
+    <div style="display:flex;align-items:center;gap:16px;flex-shrink:0;margin:0 0 8px;">
+      <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+      <p style="font-size:clamp(14px,1.2vw,17px);font-weight:700;letter-spacing:-0.02em;color:var(--ink);line-height:1.5;margin:0;">우리 부문의 3대 Horizon을 그려본다면 어떤 모습인가요? H1~H3 중 우리는 무엇을 잘하고 있고, 무엇이 부족한가요?</p>
+    </div>
+      <div style="background:#fff;border:1px solid #e8e8ed;border-radius:10px;padding:16px 24px;display:flex;flex-direction:column;gap:9px;">
+        <div style="font-size:clamp(11px,0.88vw,13.5px);font-weight:700;color:#1d1d1f;line-height:1.3;flex-shrink:0;">1. 진퇴양난</div>
+        <div style="display:flex;align-items:center;gap:0;"><div style="flex:1;height:34px;border-radius:17px;background:#e8e8ed;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#999;letter-spacing:0.02em;">H1 ×</div><div style="width:14px;flex-shrink:0;height:2px;background:#d8d8d8;align-self:center;"></div><div style="flex:1;height:34px;border-radius:17px;background:#e8e8ed;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#999;letter-spacing:0.02em;">H2 ×</div><div style="width:14px;flex-shrink:0;height:2px;background:#d8d8d8;align-self:center;"></div><div style="flex:1;height:34px;border-radius:17px;background:#e8e8ed;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#999;letter-spacing:0.02em;">H3 ×</div></div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8ed;border-radius:10px;padding:16px 24px;display:flex;flex-direction:column;gap:9px;">
+        <div style="font-size:clamp(11px,0.88vw,13.5px);font-weight:700;color:#1d1d1f;line-height:1.3;flex-shrink:0;">2. 성장여건 미비</div>
+        <div style="display:flex;align-items:center;gap:0;"><div style="flex:1;height:34px;border-radius:17px;background:#e8e8ed;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#999;letter-spacing:0.02em;">H1 ×</div><div style="width:14px;flex-shrink:0;height:2px;background:#d8d8d8;align-self:center;"></div><div style="flex:1;height:34px;border-radius:17px;background:#a8d8bc;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#fff;letter-spacing:0.02em;">H2 ○</div><div style="width:14px;flex-shrink:0;height:2px;background:#d8d8d8;align-self:center;"></div><div style="flex:1;height:34px;border-radius:17px;background:#e8c840;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#fff;letter-spacing:0.02em;">H3 ○</div></div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8ed;border-radius:10px;padding:16px 24px;display:flex;flex-direction:column;gap:9px;">
+        <div style="font-size:clamp(11px,0.88vw,13.5px);font-weight:700;color:#1d1d1f;line-height:1.3;flex-shrink:0;">3. 핵심사업에 지나치게 주력함으로써 성장이 정체</div>
+        <div style="display:flex;align-items:center;gap:0;"><div style="flex:1;height:34px;border-radius:17px;background:#90b8e8;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#fff;letter-spacing:0.02em;">H1 ○</div><div style="width:14px;flex-shrink:0;height:2px;background:#d8d8d8;align-self:center;"></div><div style="flex:1;height:34px;border-radius:17px;background:#e8e8ed;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#999;letter-spacing:0.02em;">H2 ×</div><div style="width:14px;flex-shrink:0;height:2px;background:#d8d8d8;align-self:center;"></div><div style="flex:1;height:34px;border-radius:17px;background:#e8e8ed;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#999;letter-spacing:0.02em;">H3 ×</div></div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8ed;border-radius:10px;padding:16px 24px;display:flex;flex-direction:column;gap:9px;">
+        <div style="font-size:clamp(11px,0.88vw,13.5px);font-weight:700;color:#1d1d1f;line-height:1.3;flex-shrink:0;">4. 새로운 미래에 대한 투자</div>
+        <div style="display:flex;align-items:center;gap:0;"><div style="flex:1;height:34px;border-radius:17px;background:#e8e8ed;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#999;letter-spacing:0.02em;">H1 ×</div><div style="width:14px;flex-shrink:0;height:2px;background:#d8d8d8;align-self:center;"></div><div style="flex:1;height:34px;border-radius:17px;background:#a8d8bc;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#fff;letter-spacing:0.02em;">H2 ○</div><div style="width:14px;flex-shrink:0;height:2px;background:#d8d8d8;align-self:center;"></div><div style="flex:1;height:34px;border-radius:17px;background:#e8e8ed;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#999;letter-spacing:0.02em;">H3 ×</div></div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8ed;border-radius:10px;padding:16px 24px;display:flex;flex-direction:column;gap:9px;">
+        <div style="font-size:clamp(11px,0.88vw,13.5px);font-weight:700;color:#1d1d1f;line-height:1.3;flex-shrink:0;">5. 아이디어 창출이 사업개발로 연결되지 못함</div>
+        <div style="display:flex;align-items:center;gap:0;"><div style="flex:1;height:34px;border-radius:17px;background:#90b8e8;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#fff;letter-spacing:0.02em;">H1 ○</div><div style="width:14px;flex-shrink:0;height:2px;background:#d8d8d8;align-self:center;"></div><div style="flex:1;height:34px;border-radius:17px;background:#e8e8ed;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#999;letter-spacing:0.02em;">H2 ×</div><div style="width:14px;flex-shrink:0;height:2px;background:#d8d8d8;align-self:center;"></div><div style="flex:1;height:34px;border-radius:17px;background:#e8c840;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#fff;letter-spacing:0.02em;">H3 ○</div></div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8ed;border-radius:10px;padding:16px 24px;display:flex;flex-direction:column;gap:9px;">
+        <div style="font-size:clamp(11px,0.88vw,13.5px);font-weight:700;color:#1d1d1f;line-height:1.3;flex-shrink:0;">6. 미래를 위한 준비 부족</div>
+        <div style="display:flex;align-items:center;gap:0;"><div style="flex:1;height:34px;border-radius:17px;background:#90b8e8;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#fff;letter-spacing:0.02em;">H1 ○</div><div style="width:14px;flex-shrink:0;height:2px;background:#d8d8d8;align-self:center;"></div><div style="flex:1;height:34px;border-radius:17px;background:#a8d8bc;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#fff;letter-spacing:0.02em;">H2 ○</div><div style="width:14px;flex-shrink:0;height:2px;background:#d8d8d8;align-self:center;"></div><div style="flex:1;height:34px;border-radius:17px;background:#e8e8ed;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#999;letter-spacing:0.02em;">H3 ×</div></div>
+      </div>
+  </div>
+</div>
+
+<div class="slide s-white" data-index="4" style="align-items:center;justify-content:center;padding:3vh 6vw;">
+  <div style="width:100%;max-width:1100px;">
+    <p style="font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-48);margin-bottom:22px;">Discussion</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:center;gap:20px;padding:20px 32px;border-radius:14px;background:var(--parch);border:1px solid var(--line);min-height:72px;">
+        <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;white-space:nowrap;">우리 부문의 3대 Horizon을 그려본다면 어떤 모습인가요? H1~H3 중 우리는 무엇을 잘하고 있고, 무엇이 부족한가요?</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;padding:20px 32px;border-radius:14px;background:var(--parch);border:1px solid var(--line);min-height:72px;">
+        <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;white-space:nowrap;">내가 담당하는 사업의 다음 성장을 위해 지금 가장 우선순위로 추진해야 할 것은 무엇인가요?</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;padding:20px 32px;border-radius:14px;background:var(--parch);border:1px solid var(--line);min-height:72px;">
+        <div style="font-size:15px;font-weight:700;color:#fff;background:var(--ink);width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+        <p style="font-size:clamp(17px,1.8vw,20px);color:var(--ink);line-height:1.7;letter-spacing:-0.015em;white-space:nowrap;">그 우선순위를 실현하기 위해 리더십 또는 조직관리 측면에서 지켜야 할 것과 보완해야 할 것은 무엇인가요?</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     4. 3대 Horizon 진단
+══════════════════════════════════════ -->
+
+
+<div class="slide s-white" data-index="5" style="flex-direction:column;text-align:center;">
+  <div style="text-align:center;max-width:800px;">
+    <p style="font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-48);margin-bottom:28px;">Leaders Book Club · 2026년 6월</p>
+    <h2 style="font-size:clamp(28px,4vw,56px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;color:var(--ink);margin-bottom:20px;white-space:nowrap;">이제 우리의 Horizon을 그려봅시다.</h2>
+    <p style="font-size:clamp(16px,1.7vw,20px);font-weight:400;color:var(--ink-48);line-height:1.75;max-width:640px;margin:0 auto;">각자의 자리에서 H1을 지키고, H2를 키우고, H3의 씨앗을 심는 것.<br>그것이 우리가 함께 만들어갈 퍼시스그룹의 성장입니다.</p>
+</div>
+
+
+
+</div><!-- /slides -->
+
+<div class="slide-num" id="slideNum">1 / 6</div>
+<div class="nav">
+  <button class="nav-btn" id="prev">←</button>
+  <div class="pdots" id="dots"></div>
+  <button class="nav-btn" id="next">→</button>
+</div>
+<div class="key-hint">
+  <span class="key">←</span><span class="key">→</span> 키보드로 이동
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsWrap = document.getElementById('dots');
+  const slideNum = document.getElementById('slideNum');
+  let current = 0;
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'pdot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsWrap.appendChild(d);
+  });
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsWrap.children[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dotsWrap.children[current].classList.add('active');
+    slideNum.textContent = (current + 1) + ' / ' + slides.length;
+  }
+  document.getElementById('prev').onclick = () => goTo(current - 1);
+  document.getElementById('next').onclick = () => goTo(current + 1);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(current - 1);
+  });
+</script>
+</body>
+</html>
